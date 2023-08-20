@@ -1,29 +1,28 @@
 <script setup>
 
 import { useUserStore } from "@/stores/user";
-import { ref } from 'vue';
-import router from "../router";
 
+import { ref } from 'vue';
+import router from '@/router'
 const userStore = useUserStore();
 
 const email = ref("");
 const password = ref("");
-console.log(userStore.user)
 </script>
 
 <template>
-  <h1>Sign Up</h1>
-
-
-
+    <h1>Sign In</h1>
+   
   <input placeholder=" Email" v-model="email">
   <br>
   <br>
   <input placeholder=" Password" v-model="password">
   <br>
-  <router-link :to="{ path: `/login` }" >To log in </router-link>
   <br>
-  <button @click="userStore.createNewUser(email, password)"> Sign Up </button>
+  <button @click="userStore.signInUser(email, password)"> Sign In </button>
+
+    <br>
+
+
   
-  <br>
 </template>
