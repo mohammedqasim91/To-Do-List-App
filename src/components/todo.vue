@@ -41,33 +41,126 @@ onMounted(fetchTasks);
 
 
 <template>
-  <h1>To Do List</h1>
+    <div class="todo-container">
 
-  <input placeholder="insert a task" v-model="task"/>
-  <button @click="insertTask">Add</button>
+      <h1 class="todo-title">To Do List</h1>
 
-  <ul>
-    <li v-for="taskItem in tasks" :key="taskItem.id">{{ taskItem.title  }}
-        <span>{{ taskItem.id }}</span> 
-        <button @click="deleteTask(taskItem.id)">
-        <img src="../assets/delete1.png" alt="delete-img">
-        </button>
+      <div class="todo-form-container">
 
-        <button @click="changeTask(taskItem.id)">
-        <img src="../assets/edit1.png" alt="edit-img">
-        </button>
+        <input class="todo-input" placeholder="insert a task" v-model="task"/>
+        
+        <button class="todo-button" @click="insertTask">Add</button>
+        
+      </div>
+      
+     
+      <ul class="todo-task-list">
+        <li v-for="taskItem in tasks" :key="taskItem.id" class="todo-task-item">
+          
+          <span class="todo-task-title">{{ taskItem.title }}</span>
+          <span class="todo-task-id">{{ taskItem.id }}</span>
 
-        <input placeholder="edit a task" v-model="task"/>
-        <button @click="insertTask">edit</button>
-    </li>
-  </ul>
+          <div class="todo-task-buttons">
+
+            <button class="todo-task-button" @click="deleteTask(taskItem.id)">
+              <select>delete</select>
+           
+            </button>
+
+            <button class="todo-task-button" @click="changeTask(taskItem.id)">
+             <select>edit</select>
+
+            </button>
+
+          </div>
+          
+          <div class="todo-task-edit">
+            <input class="todo-input" placeholder="edit a task" v-model="task"/>
+            <button class="todo-button" @click="insertTask">edit</button>
+          </div>
+        </li>
+      </ul>
+      
+    
+    </div>
 </template>
 
 
 <style>
-img {
-    width: 10px;
-    height: 10px;
-    }
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.todo-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.todo-form-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  width: 200px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.todo-button {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todo-task-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.todo-task-title {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.todo-task-buttons {
+  display: flex;
+}
+
+.todo-task-button {
+  padding: 5px;
+  background-color:green;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.todo-task-edit {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .todo-input,
+  .todo-button {
+    width: 100%;
+  }
+}
 </style>

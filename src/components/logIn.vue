@@ -1,28 +1,84 @@
 <script setup>
 
 import { useUserStore } from "@/stores/user";
-
 import { ref } from 'vue';
 import router from '@/router'
+
 const userStore = useUserStore();
 
 const email = ref("");
 const password = ref("");
+
 </script>
 
 <template>
-    <h1>Sign In</h1>
-   
-  <input placeholder=" Email" v-model="email">
-  <br>
-  <br>
-  <input placeholder=" Password" v-model="password">
-  <br>
-  <br>
-  <button @click="userStore.signInUser(email, password)"> Sign In </button>
+  <div class="home-container">
 
-    <br>
+    <h1 class="home-title">Sign In</h1>
+
+    <div class="home-form-container">
+
+      <input class="home-input" placeholder=" Email" v-model="email">
+      <br>
+      <br>
+      <input class="home-input" placeholder=" Password" v-model="password">
+      <br>
+      <br>
+      <button @click="userStore.signInUser(email, password)" class="sign-in-btn"> Sign In </button>
+
+    </div>
+
+  </div>
 
 
-  
 </template>
+
+<style>
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.home-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.home-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  width: 300px;
+  max-width: 100%;
+}
+
+.sign-in-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .home-input {
+    width: 100%;
+  }
+}
+
+</style>
