@@ -1,6 +1,6 @@
 <script setup>
 import { useTaskStore } from "@/stores/task";
-import supabase from "../lib/supabase"
+import supabase from "../lib/supabase";
 import { ref, onMounted } from 'vue';
 
 const taskStore = useTaskStore();
