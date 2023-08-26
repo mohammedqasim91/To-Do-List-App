@@ -31,58 +31,61 @@ const deleteTask = async (id) => {
   await fetchTasks();
   task.value = "";
 }
-const changeTask = async (id) => {
-    await taskStore.changeTask(id);
-    await fetchTasks();
+const changeTask = async (taskItem) => {
+  await taskStore.changeTask(taskItem.id, taskItem.title); // Update the task in the taskStore
+  const { data, error } = await supabase
+    .from('tasks')
+    .update({ title: taskItem.title })
+    .match({ id: taskItem.id }); // Update the task in the Supabase database
+
+  if (error) {
+    console.log(error);
+  } else {
+    await fetchTasks(); // Fetch the updated tasks after the change
     task.value = "";
+  }
 }
+
 onMounted(fetchTasks);
+
 </script>
 
-
 <template>
-    <div class="todo-container">
 
-      <h1 class="todo-title">To Do List</h1>
+  <div class="todo-container">
+  
+    <h1 class="todo-title">To Do List</h1>
 
-      <div class="todo-form-container">
-
-        <input class="todo-input" placeholder="insert a task" v-model="task"/>
-        
-        <button class="todo-button" @click="insertTask">Add</button>
-        
-      </div>
-      
-     
-      <ul class="todo-task-list">
-        <li v-for="taskItem in tasks" :key="taskItem.id" class="todo-task-item">
-          
-          <span class="todo-task-title">{{ taskItem.title }}</span>
-          <span class="todo-task-id">{{ taskItem.id }}</span>
-
-          <div class="todo-task-buttons">
-
-            <button class="todo-task-button" @click="deleteTask(taskItem.id)">
-              <select>delete</select>
-           
-            </button>
-
-            <button class="todo-task-button" @click="changeTask(taskItem.id)">
-             <select>edit</select>
-
-            </button>
-
-          </div>
-          
-          <div class="todo-task-edit">
-            <input class="todo-input" placeholder="edit a task" v-model="task"/>
-            <button class="todo-button" @click="insertTask">edit</button>
-          </div>
-        </li>
-      </ul>
-      
-    
+    <div class="todo-form-container">
+      <input class="todo-input" placeholder="Insert a task" v-model="task" />
+      <button class="todo-button" @click="insertTask">Add</button>
     </div>
+
+    <ul class="todo-task-list">
+      <li v-for="taskItem in tasks" :key="taskItem.id" class="todo-task-item">
+
+        <div v-if="taskItem.editing">
+          <div class="todo-task-edit">
+            <input class="todo-input" placeholder="Edit a task" v-model="taskItem.title" />
+            <br>
+            <button class="todo-icon-button save-button" @click="changeTask(taskItem)">Save</button>
+          </div>
+        </div>
+
+        <div v-else>
+          <span class="todo-task-id">{{ taskItem.id }}-</span>
+          <span class="todo-task-title">{{ taskItem.title }}</span>
+          <div class="todo-task-buttons">
+            <button class="todo-icon-button delete-button" @click="deleteTask(taskItem.id)"></button>
+            <br>
+            <button class="todo-icon-button edit-button" @click="taskItem.editing = true"></button>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+
+  </div>
 </template>
 
 
@@ -151,6 +154,32 @@ onMounted(fetchTasks);
   margin-right: 5px;
 }
 
+
+.todo-task-edit {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.todo-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
+
+.delete-button {
+  background-image: url("../assets/delete.png");
+  background-size: cover;
+}
+
+.edit-button {
+  background-image: url("../assets/edit.png");
+  background-size: cover;
+}
+
 .todo-task-edit {
   display: flex;
   align-items: center;
@@ -161,6 +190,27 @@ onMounted(fetchTasks);
   .todo-input,
   .todo-button {
     width: 100%;
+  }
+
+  .todo-task-item {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .todo-task-title {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .todo-task-buttons {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .todo-icon-button {
+    margin-left: 0;
+    margin-right: 5px;
   }
 }
 </style>
