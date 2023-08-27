@@ -73,8 +73,7 @@ onMounted(fetchTasks);
         </div>
 
         <div v-else>
-          <span class="todo-task-id">{{ taskItem.id }}-</span>
-          <span class="todo-task-title">{{ taskItem.title }}</span>
+          <p class="todo-task-title">{{ taskItem.id }}-{{ taskItem.title }}</p>
           <div class="todo-task-buttons">
             <button class="todo-icon-button delete-button" @click="deleteTask(taskItem.id)"></button>
             <br>
