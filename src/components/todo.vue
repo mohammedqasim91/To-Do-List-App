@@ -2,10 +2,14 @@
 import { useTaskStore } from "@/stores/task";
 import supabase from "../lib/supabase";
 import { ref, onMounted } from 'vue';
+import { useUserStore } from "@/stores/user";
+import { useRouter } from 'vue-router'; 
 
 const taskStore = useTaskStore();
 const task = ref("");
 const tasks = ref([]);
+const userStore = useUserStore();
+const router = useRouter();
 
 const fetchTasks = async () => {
   const { data, error } = await supabase
@@ -45,6 +49,10 @@ const changeTask = async (taskItem) => {
     task.value = "";
   }
 }
+const signOut = async () => {
+  await userStore.signOutUser();
+  router.push('/');
+}
 
 onMounted(fetchTasks);
 
@@ -83,7 +91,9 @@ onMounted(fetchTasks);
 
       </li>
     </ul>
-
+    <div class="'sign-out'">
+      <button class="sign-out-btn" @click="signOut">Sign Out</button>
+    </div>
   </div>
 </template>
 

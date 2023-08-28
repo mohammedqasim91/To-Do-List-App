@@ -24,8 +24,8 @@ const password = ref("");
       <input class="home-input" placeholder=" Password" v-model="password">
       <br>
       <br>
-      <button @click="userStore.signInUser(email, password)" class="sign-in-btn"> Sign In </button>
-
+      <button @click="userStore.signInUser(email, password)" class="sign-in-btn">Sign In</button>
+      <br>
     </div>
 
   </div>
