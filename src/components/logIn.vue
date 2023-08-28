@@ -9,6 +9,7 @@ const userStore = useUserStore();
 const email = ref("");
 const password = ref("");
 
+const showPassword = ref(false);
 </script>
 
 <template>
@@ -19,9 +20,15 @@ const password = ref("");
     <div class="home-form-container">
 
       <input class="home-input" placeholder=" Email" v-model="email">
-      <br>
-      <br>
-      <input class="home-input" placeholder=" Password" v-model="password">
+      
+      <div class="password-input-container">
+        <input class="home-input" placeholder="Password" v-model="password" :type="showPassword ? 'text' : 'password'">
+        <label class="password-label">
+          
+          <input type="checkbox" v-model="showPassword">
+          Show Password
+        </label>
+      </div>
       <br>
       <br>
       <button @click="userStore.signInUser(email, password)" class="sign-in-btn">Sign In</button>
@@ -75,7 +82,7 @@ const password = ref("");
   cursor: pointer;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .home-input {
     width: 100%;
   }

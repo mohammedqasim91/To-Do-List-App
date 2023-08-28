@@ -37,21 +37,21 @@ const deleteTask = async (id) => {
 }
 const changeTask = async (taskItem) => {
   await taskStore.changeTask(taskItem.id, taskItem.title); // Update the task in the taskStore
-  const { data, error } = await supabase
+  const { data, error } = await supabase 
     .from('tasks')
-    .update({ title: taskItem.title })
+    .update({ title: taskItem.title })  
     .match({ id: taskItem.id }); // Update the task in the Supabase database
 
   if (error) {
     console.log(error);
   } else {
     await fetchTasks(); // Fetch the updated tasks after the change
-    task.value = "";
+    task.value = ""; // Clear the input field
   }
 }
 const signOut = async () => {
-  await userStore.signOutUser();
-  router.push('/');
+  await userStore.signOutUser(); // Sign out the user from the userStore
+  router.push('/'); // Redirect the user to the home page
 }
 
 onMounted(fetchTasks);
@@ -72,25 +72,26 @@ onMounted(fetchTasks);
     <ul class="todo-task-list">
       <li v-for="taskItem in tasks" :key="taskItem.id" class="todo-task-item">
 
-        <div v-if="taskItem.editing">
-          <div class="todo-task-edit">
-            <input class="todo-input" placeholder="Edit a task" v-model="taskItem.title" />
-            <br>
-            <button class="todo-icon-button save-button" @click="changeTask(taskItem)">Save</button>
-          </div>
+        <div v-if="taskItem.editing" class="todo-task-edit">
+            <input class="todo-input todo-input-edit" placeholder="Edit a task" v-model="taskItem.title" />
+            
+            <button class="todo-icon-button save-button" @click="changeTask(taskItem)">
+              
+            </button>
         </div>
 
         <div v-else>
           <p class="todo-task-title">{{ taskItem.id }}-{{ taskItem.title }}</p>
           <div class="todo-task-buttons">
+
             <button class="todo-icon-button delete-button" @click="deleteTask(taskItem.id)"></button>
-            <br>
+            
             <button class="todo-icon-button edit-button" @click="taskItem.editing = true"></button>
           </div>
         </div>
-
       </li>
     </ul>
+
     <div class="'sign-out'">
       <button class="sign-out-btn" @click="signOut">Sign Out</button>
     </div>
@@ -103,23 +104,25 @@ onMounted(fetchTasks);
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-.todo-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
 
 .todo-form-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
 }
 
 .todo-input {
-  width: 200px;
-  height: 30px;
-  margin-right: 10px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .todo-button {
@@ -130,6 +133,8 @@ onMounted(fetchTasks);
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-left: 10px;
+  width: 100%;
 }
 
 .todo-task-list {
@@ -143,31 +148,25 @@ onMounted(fetchTasks);
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .todo-task-title {
+  font-size: 16px;
+  margin: 0;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   flex-grow: 1;
   margin-right: 10px;
 }
 
 .todo-task-buttons {
   display: flex;
-}
-
-.todo-task-button {
-  padding: 5px;
-  background-color:green;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin-right: 5px;
-}
-
-
-.todo-task-edit {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
 }
 
 .todo-icon-button {
@@ -177,6 +176,16 @@ onMounted(fetchTasks);
   width: 20px;
   height: 20px;
   margin-left: 5px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.todo-icon-button:hover {
+  opacity: 0.7;
+}
+
+.save-button {
+  background-image: url("../assets/sav.png");
+  background-size: cover;
 }
 
 .delete-button {
@@ -189,37 +198,45 @@ onMounted(fetchTasks);
   background-size: cover;
 }
 
-.todo-task-edit {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
+
+.sign-out {
+  margin-top: 20px;
+}
+
+.sign-out-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.sign-out-btn:hover {
+  background-color: #c82333;
 }
 
 @media (max-width: 600px) {
   .todo-input,
-  .todo-button {
+  .todo-button,
+  .todo-input-edit {
     width: 100%;
   }
 
   .todo-task-item {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
   }
 
   .todo-task-title {
-    margin-right: 0;
-    margin-bottom: 10px;
+    margin-right: 10px;
   }
 
-  .todo-task-buttons {
-    flex-direction: row;
-    justify-content: flex-start;
-  }
 
-  .todo-icon-button {
-    margin-left: 0;
-    margin-right: 5px;
+.sign-out {
+    margin-top: 10px;
   }
 }
+
 </style>
