@@ -5,6 +5,14 @@ import { useUserStore } from "@/stores/user";
 import { ref } from 'vue';
 import router from "../router";
 
+
+// ...
+
+function navigateToLogin() {
+  if (email.value && password.value) {
+    router.push('/login');
+  }
+}
 const userStore = useUserStore();
 
 const email = ref("");
@@ -22,7 +30,7 @@ const showPassword = ref(false);
 
     <p class="home-description">This App helps you Create a list of Tasks, You can also edit or delete them.</p>
 
-    <div class="home-form-container">
+    <form class="home-form-container" @submit.prevent="userStore.createNewUser(email, password)">
 
       <input class="home-input" placeholder=" Email" v-model="email">
         
@@ -36,12 +44,12 @@ const showPassword = ref(false);
         </label>
       </div>
         
-        <router-link :to="{ path: `/login` }" class="login-link">Log In</router-link>
+        <button @click="navigateToLogin" class="login-link">Sign In</button>
         
         <button @click="userStore.createNewUser(email, password)" class="sign-up-btn">Sign Up</button>
         
 
-    </div>   
+    </form> 
     
   </div>
   <Footer />
@@ -55,7 +63,8 @@ const showPassword = ref(false);
   align-items: center;
   justify-content: center;
   font-family: 'Arial', sans-serif;
-  height: 84vh;
+  height: 75vh;
+  background-color: #999;
 }
 
 .home-title {
@@ -75,7 +84,7 @@ const showPassword = ref(false);
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ffffff;
+  background: aqua;
   padding: 24px;
   border: 1px solid #dbdbdb;
   border-radius: 4px;

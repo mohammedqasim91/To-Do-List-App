@@ -29,9 +29,12 @@ const signOut = async () => {
 <style scoped>
 
 nav {
-display: flex;
-justify-content: space-around;
-align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f6b3b3;
+  padding: 15px;
+  justify-content: space-around;
 }
  
 .brand-logo {
@@ -41,7 +44,7 @@ align-items: center;
 .login-link,
 .sign-out-btn {
   padding: 5px 20px;
-  background-color:#532f2f ;
+  background-color: #3897f0;
   color: #fff;
   border: none;
   border-radius: 4px;

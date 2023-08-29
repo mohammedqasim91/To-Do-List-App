@@ -1,4 +1,5 @@
 <script setup>
+import Footer from "@/components/Footer.vue"
 import NavBar from "@/components/NavBar.vue"
 import { useTaskStore } from "@/stores/task";
 import supabase from "../lib/supabase";
@@ -58,50 +59,46 @@ onMounted(fetchTasks);
 
 <template>
 <NavBar />
+
   <div class="todo-container">
-  
     <h1 class="todo-title">To Do List</h1>
 
-    <div class="todo-form-container">
-      <input class="todo-input" placeholder="Insert a task" v-model="task" />
-      <button class="todo-button" @click="insertTask">Add</button>
-    </div>
+    <form class="todo-form-container" @submit.prevent="insertTask">
 
-    <ul class="todo-task-list">
-      <li v-for="taskItem in tasks" :key="taskItem.id" class="todo-task-item">
+        <input class="todo-input" placeholder="Insert a Task" v-model="task" />
+        <button class="todo-button" type="submit">Add </button>
+      
 
-        <div v-if="taskItem.editing" class="todo-task-edit">
+      <ul class="todo-task-list">
+        <li v-for="taskItem in tasks" :key="taskItem.id" class="todo-task-item">
+          <div v-if="taskItem.editing" class="todo-task-edit">
             <input class="todo-input todo-input-edit" placeholder="Edit a task" v-model="taskItem.title" />
-            
-            <button class="todo-icon-button save-button" @click="changeTask(taskItem)">
-              
-            </button>
-        </div>
-
-        <div v-else>
-          <p class="todo-task-title">{{ taskItem.id }}-{{ taskItem.title }}</p>
-          <div class="todo-task-buttons">
-
-            <button class="todo-icon-button delete-button" @click="deleteTask(taskItem.id)"></button>
-            
-            <button class="todo-icon-button edit-button" @click="taskItem.editing = true"></button>
+            <button class="todo-icon-button save-button" @click="changeTask(taskItem)"></button>
           </div>
-        </div>
-      </li>
-    </ul>
-
-
+          <div v-else>
+            <p class="todo-task-title">{{ taskItem.id }}-{{ taskItem.title }}</p>
+            <div class="todo-task-buttons">
+              <button class="todo-icon-button delete-button" @click="deleteTask(taskItem.id)"></button>
+              <button class="todo-icon-button edit-button" @click="taskItem.editing = true"></button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </form>
   </div>
+  <Footer />
 </template>
 
 
 <style scoped>
 .todo-container {
+  background-color: #999 !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   font-family: Arial, sans-serif;
+  height: 65vh;
 }
 
 
@@ -110,6 +107,10 @@ onMounted(fetchTasks);
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #781515;
+  background-color: aqua;
 }
 
 .todo-input {
@@ -129,7 +130,6 @@ onMounted(fetchTasks);
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 10px;
   width: 100%;
 }
 

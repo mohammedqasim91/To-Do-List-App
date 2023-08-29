@@ -1,8 +1,11 @@
 <script setup>
+import Footer from "@/components/Footer.vue"
 import NavBar from "@/components/NavBar.vue"
 import { useUserStore } from "@/stores/user";
 import { ref } from 'vue';
 import router from '@/router'
+
+
 
 const userStore = useUserStore();
 
@@ -19,7 +22,7 @@ const showPassword = ref(false);
 
     <h1 class="home-title">Sign In</h1>
 
-    <div class="home-form-container">
+    <form @submit.prevent="userStore.signInUser(email, password)" class="home-form-container">
 
       <input class="home-input" placeholder=" Email" v-model="email">
       
@@ -32,23 +35,23 @@ const showPassword = ref(false);
           Show Password
         </label>
 
-        <button @click="userStore.signInUser(email, password)" class="sign-in-btn">Sign In</button>
+        <button type="submit" class="sign-in-btn">Sign In</button>
       </div>
       
-    </div>
+    </form>
 
   </div>
-
-
+  <Footer />
 </template>
 
 <style>
 .home-container {
+  background-color: #999;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 84vh;
+  height: 75vh;
   font-family: Arial, sans-serif;
 }
 
@@ -62,7 +65,7 @@ const showPassword = ref(false);
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ffffff;
+  background: aqua;
   padding: 24px;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
