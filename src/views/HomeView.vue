@@ -1,5 +1,6 @@
 <script setup>
-
+import Footer from "@/components/Footer.vue"
+import NavBar from "@/components/NavBar.vue"
 import { useUserStore } from "@/stores/user";
 import { ref } from 'vue';
 import router from "../router";
@@ -14,6 +15,7 @@ const showPassword = ref(false);
 </script>
 
 <template>
+  <NavBar />
   <div class="home-container">
 
     <h1 class="home-title">TODO App</h1>
@@ -42,19 +44,18 @@ const showPassword = ref(false);
     </div>   
     
   </div>
-
+  <Footer />
 </template>
 
-<style>
+<style scoped>
 
 .home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   font-family: 'Arial', sans-serif;
-  background: #fafafa;
+  height: 84vh;
 }
 
 .home-title {
@@ -94,8 +95,6 @@ const showPassword = ref(false);
   margin-bottom: 10px;
 }
 
-
-
 .password-label {
   font-size: 12px;
   color: #8e8e8e;
@@ -105,18 +104,21 @@ const showPassword = ref(false);
 }
 
 .login-link {
-  color: #3897f0;
-  text-decoration: none;
-  margin-bottom: 8px;
-  font-size: 14px;
+  padding: 10px 25px;
+font-size: 14px;
+background-color: #3897f0;
+color: #ffffff;
+border-radius: 4px;
+cursor: pointer;
+text-decoration: none;
+margin: 10px;
 }
-
 .sign-up-btn {
   padding: 10px 20px;
   font-size: 14px;
   background-color: #3897f0;
   color: #ffffff;
-  border: none;
+
   border-radius: 4px;
   cursor: pointer;
 }

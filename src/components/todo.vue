@@ -1,4 +1,5 @@
 <script setup>
+import NavBar from "@/components/NavBar.vue"
 import { useTaskStore } from "@/stores/task";
 import supabase from "../lib/supabase";
 import { ref, onMounted } from 'vue';
@@ -49,17 +50,14 @@ const changeTask = async (taskItem) => {
     task.value = ""; // Clear the input field
   }
 }
-const signOut = async () => {
-  await userStore.signOutUser(); // Sign out the user from the userStore
-  router.push('/'); // Redirect the user to the home page
-}
+
 
 onMounted(fetchTasks);
 
 </script>
 
 <template>
-
+<NavBar />
   <div class="todo-container">
   
     <h1 class="todo-title">To Do List</h1>
@@ -92,14 +90,12 @@ onMounted(fetchTasks);
       </li>
     </ul>
 
-    <div class="'sign-out'">
-      <button class="sign-out-btn" @click="signOut">Sign Out</button>
-    </div>
+
   </div>
 </template>
 
 
-<style>
+<style scoped>
 .todo-container {
   display: flex;
   flex-direction: column;
