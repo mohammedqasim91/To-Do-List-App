@@ -132,11 +132,10 @@ const showPassword = ref(false);
   align-items: center;
 }
 .login-link:hover {
-  background-color: #1877f2;
+  background-color: #2404da;
 }
-
 .sign-up-btn:hover {
-  background-color: #1877f2;
+  background-color: #2404da;
 }
 
 @media (max-width: 600px) {

@@ -52,6 +52,10 @@ const changeTask = async (taskItem) => {
   }
 }
 
+const signOut = async () => {
+  await userStore.signOutUser(); // Sign out the user from the userStore
+  router.push('/'); // Redirect the user to the home page
+}
 
 onMounted(fetchTasks);
 
@@ -66,10 +70,10 @@ onMounted(fetchTasks);
         
       <div class="left-todo">
         
-        <h1 class="todo-title">todo Task</h1>
+        <h1 class="todo-title">todo Tasks</h1>
         <input class="todo-input" placeholder="Insert a Task" v-model="task" />
-        <button class="todo-button" type="submit">Add Your List</button>
-      
+        <button class="add-task-btn" type="submit">Add Task</button>
+        <button class="sign-out-btn" @click="signOut">Sign Out</button>
       </div>
 
       <div class="right-todo">
@@ -77,17 +81,16 @@ onMounted(fetchTasks);
         <li v-for="taskItem in tasks" :key="taskItem.id" class="todo-task-item">
           <div v-if="taskItem.editing" class="todo-task-edit">
             <input class="todo-input todo-input-edit" placeholder="Edit a task" v-model="taskItem.title" />
-            <button class="todo-icon-button save-button" @click="changeTask(taskItem)"></button>
+            <br>
+            <button class="save-button" @click="changeTask(taskItem)"></button>
           </div>
           <div v-else>
-            <div>
-                <input type="checkbox" v-model="taskItem.completed" @change="changeTask(taskItem)">
-                <label :for="'task-' + taskItem.id" :class="{'completed-task': taskItem.completed}">{{ taskItem.title }}</label>
-              </div>
             <div class="todo-task-buttons">
-              <button class="todo-icon-button delete-button" @click="deleteTask(taskItem.id)"></button>
-              <button class="todo-icon-button edit-button" @click="taskItem.editing = true"></button>
-            </div>
+                <input type="checkbox" v-model="taskItem.completed" @change="changeTask(taskItem)">
+                <label class="task-list" :for="'task-' + taskItem.id" :class="{'completed-task': taskItem.completed}">{{ taskItem.title }}</label>
+                <button class="todo-icon-button delete-button" @click="deleteTask(taskItem.id)"></button>
+                <button class="todo-icon-button edit-button" @click="taskItem.editing = true"></button>
+              </div>
           </div>
         </li>
       </ul>
@@ -130,7 +133,7 @@ onMounted(fetchTasks);
   align-items: center;
   margin-right: 25px;
   background-color: #b62e2e;
-  height: 200px;
+  height: 250px;
   width: 250px;
   border-radius: 20px;
 }
@@ -139,7 +142,6 @@ onMounted(fetchTasks);
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 40px;
 }
 
 .todo-input {
@@ -151,7 +153,7 @@ onMounted(fetchTasks);
   margin-bottom: 20px;
 }
 
-.todo-button {
+.add-task-btn {
   padding: 8px 16px;
   font-size: 16px;
   background-color: #007bff;
@@ -159,15 +161,30 @@ onMounted(fetchTasks);
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 207px;
+  width: 96px;
+  margin-bottom: 10px;
 }
 
+.sign-out-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 96px;
+}
 .right-todo {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-left: 25px;
+}
+
+.task-list {
+  margin: 8px 5px 5px 8px;
 }
 .todo-task-list {
   list-style-type: none;
@@ -204,8 +221,8 @@ onMounted(fetchTasks);
 .todo-icon-button {
 border: none;
 cursor: pointer;
-width: 30px;
-height: 30px;
+width: 35px;
+height: 35px;
 margin-left: 10px;
 transition: opacity 0.2s ease-in-out;
 }
@@ -217,6 +234,12 @@ transition: opacity 0.2s ease-in-out;
 .save-button {
   background-image: url("../assets/update.png");
   background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  margin-left: 75px;
 }
 
 .delete-button {
@@ -234,19 +257,11 @@ transition: opacity 0.2s ease-in-out;
   margin-top: 20px;
 }
 
-.sign-out-btn {
-  padding: 8px 16px;
-  font-size: 16px;
-  background-color: #dc3545;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+.add-task-btn:hover {
+  background-color: #2404da;
 }
-
 .sign-out-btn:hover {
-  background-color: #c82333;
+  background-color: #2404da;
 }
 
 @media (max-width: 600px) {

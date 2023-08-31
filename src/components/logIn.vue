@@ -123,7 +123,7 @@ const showPassword = ref(false);
 }
 
 .sign-in-btn:hover {
-  background-color: #1877f2;
+  background-color:#2404da;
 }
 
 

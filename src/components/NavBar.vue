@@ -6,28 +6,35 @@ import { useRouter } from "vue-router";
 const userStore = useUserStore();
 const router = useRouter();
 
-const signOut = async () => {
-  await userStore.signOutUser(); // Sign out the user from the userStore
-  router.push('/'); // Redirect the user to the home page
-}
 </script>
 
 <template>
-    <nav>
-      <div class="navbar-left">
-        <img class="brand-logo" src="@/assets/s-l1600.png" alt="Mohammed Logo">
-      </div>
+  <nav>
+    <div class="navbar-left">
+      <img class="brand-logo" src="@/assets/s-l1600.png" alt="Mohammed Logo">
+    </div>
+    <div class="hello" v-if="userStore.user">{{ "Hello " + userStore.user.user.email }}</div>
 
-      <div class="navbar-right">
-        <button class="sign-out-btn" @click="signOut">Sign Out</button>
-        <router-link :to="{ path: `/login` }" class="login-link">Sign In</router-link>
-      </div>
-    </nav>
-  
+    <div class="navbar-right" :class="{ 'show': showNavbar }">
+      <ul class="navbar-menu">
+        <li class="navbar-menu-item">
+          <router-link class="navbar-menu-link" to="/">Home</router-link>
+        </li>
+        <li class="navbar-menu-item">
+          <a class="navbar-menu-link" href="#">About</a>
+        </li>
+        <li class="navbar-menu-item">
+          <a class="navbar-menu-link" href="#">Services</a>
+        </li>
+        <li class="navbar-menu-item">
+          <a class="navbar-menu-link" href="#">Careers</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 <style scoped>
-
 nav {
   display: flex;
   justify-content: space-between;
@@ -37,9 +44,18 @@ nav {
   justify-content: space-around;
   box-shadow: 0px 0px 09px 0px black;
 }
- 
+
 .brand-logo {
   height: 90px;
+}
+
+.hello {
+  font-size: 18px;
+  font-weight: bolder;
+  color: black;
+  text-decoration: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .navbar-right {
@@ -47,42 +63,27 @@ nav {
   align-items: center;
 }
 
-.login-link {
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-menu-item {
+  margin-right: 20px;
+}
+
+.navbar-menu-link {
+  color: black;
   text-decoration: none;
-  color:white; 
-  font-size: 20px;
-  font-family: Arial, sans-serif;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #3897f0;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-  border: none;
-  box-shadow: 0px 0px 09px 0px white;
-}
-.sign-out-btn {
-  text-decoration: none;
-  color: white;
-  font-size: 20px;
-  padding: 8px;
-  border-radius: 5px;
-  background-color: #3897f0;
-  margin-right: 10px;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0px 0px 09px 0px white;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
-
-.login-link:hover {
-  background-color: #1877f2;
+.navbar-menu-link:hover {
+  color: #ff6b6b;
 }
-.sign-out-btn:hover {
-  background-color: #1877f2;
-}
-
 
 @media (max-width: 600px) {
   nav {
@@ -100,5 +101,4 @@ nav {
     margin-bottom: 10px;
   }
 }
-
 </style>
