@@ -39,6 +39,7 @@
   background-color: #f6b3b3;
   padding: 15px;
   justify-content: space-around;
+  box-shadow: 0px 0px 09px 0px black;
 }
 
 .social-media-icons {

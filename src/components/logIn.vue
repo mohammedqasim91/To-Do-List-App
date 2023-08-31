@@ -20,10 +20,10 @@ const showPassword = ref(false);
   <NavBar />
   <div class="home-container">
 
-    <h1 class="home-title">Sign In</h1>
-
     <form @submit.prevent="userStore.signInUser(email, password)" class="home-form-container">
 
+      <h1 class="home-title">Welcome back !</h1>
+      
       <input class="home-input" placeholder=" Email" v-model="email">
       
       <div class="password-input-container">
@@ -44,38 +44,47 @@ const showPassword = ref(false);
   <Footer />
 </template>
 
-<style>
+<style scoped>
 .home-container {
-  background-color: #999;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 75vh;
-  font-family: Arial, sans-serif;
+  height: 72vh;
+  background-color: #999;
+  box-shadow: 0px 0px 09px 0px black;
 }
 
+
 .home-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  font-size: 25px;
+  color: unset;
 }
+
 
 .home-form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: aqua;
-  padding: 24px;
-  border: 1px solid #dbdbdb;
+  background-color: #f6b3b3;
+  padding: 55px;
   border-radius: 4px;
+  box-shadow: 0px 0px 09px 0px black;
 }
 
 .home-input {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 09px 0px black;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 12px;
 }
 
 .password-input-container {
@@ -87,21 +96,19 @@ const showPassword = ref(false);
 
 .password-label {
   font-size: 12px;
-  color: #8e8e8e;
+  color: unset;
   cursor: pointer;
   user-select: none;
-  margin-top: 8px;
 }
 
 .login-link {
-padding: 10px 25px;
-font-size: 14px;
-background-color: #3897f0;
-color: #ffffff;
-border-radius: 4px;
-cursor: pointer;
-text-decoration: none;
-margin: 10px;
+  padding: 10px 21px;
+  font-size: 14px;
+  background-color: #3897f0;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .sign-in-btn {
@@ -109,9 +116,10 @@ margin: 10px;
   font-size: 14px;
   background-color: #3897f0;
   color: #ffffff;
-
   border-radius: 4px;
   cursor: pointer;
+  text-decoration: none;
+  margin-top: 10px;
 }
 
 .sign-in-btn:hover {
@@ -122,6 +130,10 @@ margin: 10px;
 @media (max-width: 600px) {
   .home-input {
     width: 100%;
+  }
+
+  .home-form-container {
+    padding: 16px;
   }
 }
 

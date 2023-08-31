@@ -14,13 +14,13 @@ const signOut = async () => {
 
 <template>
     <nav>
-      <div>
-        <img class="brand-logo" src="@/assets/Mohammed-logo.png" alt="logo">
+      <div class="navbar-left">
+        <img class="brand-logo" src="@/assets/s-l1600.png" alt="Mohammed Logo">
       </div>
 
-      <div class="btn">
+      <div class="navbar-right">
         <button class="sign-out-btn" @click="signOut">Sign Out</button>
-        <router-link :to="{ path: `/login` }" class="login-link">Log In</router-link>
+        <router-link :to="{ path: `/login` }" class="login-link">Sign In</router-link>
       </div>
     </nav>
   
@@ -35,22 +35,70 @@ nav {
   background-color: #f6b3b3;
   padding: 15px;
   justify-content: space-around;
+  box-shadow: 0px 0px 09px 0px black;
 }
  
 .brand-logo {
-  height: 100px;
+  height: 90px;
 }
 
-.login-link,
-.sign-out-btn {
-  padding: 5px 20px;
-  background-color: #3897f0;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 10px;
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.login-link {
   text-decoration: none;
+  color:white; 
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #3897f0;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: none;
+  box-shadow: 0px 0px 09px 0px white;
+}
+.sign-out-btn {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #3897f0;
+  margin-right: 10px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0px 0px 09px 0px white;
+}
+
+
+.login-link:hover {
+  background-color: #1877f2;
+}
+.sign-out-btn:hover {
+  background-color: #1877f2;
+}
+
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .navbar-left,
+  .navbar-right {
+    margin-bottom: 10px;
+  }
+
+  .brand-logo {
+    height: 60px;
+    margin-bottom: 10px;
+  }
 }
 
 </style>

@@ -6,13 +6,6 @@ import { ref } from 'vue';
 import router from "../router";
 
 
-// ...
-
-function navigateToLogin() {
-  if (email.value && password.value) {
-    router.push('/login');
-  }
-}
 const userStore = useUserStore();
 
 const email = ref("");
@@ -25,76 +18,76 @@ const showPassword = ref(false);
 <template>
   <NavBar />
   <div class="home-container">
-
-    <h1 class="home-title">TODO App</h1>
-
-    <p class="home-description">This App helps you Create a list of Tasks, You can also edit or delete them.</p>
+    <div class="home-title">
+      <img src="../assets/ToDo-List-icon.png" alt="todo img">
+    </div>
 
     <form class="home-form-container" @submit.prevent="userStore.createNewUser(email, password)">
-
+      <p class="home-description">Welcome ToDo App, To Create an account</p>
       <input class="home-input" placeholder=" Email" v-model="email">
-        
+
       <div class="password-input-container">
         <input class="home-input" placeholder="Password" v-model="password" :type="showPassword ? 'text' : 'password'">
-        
+
         <label class="password-label">
-          
-          <input type="checkbox" v-model="showPassword">
-          Show Password
+            <input type="checkbox" v-model="showPassword">Show Password
+            <button @click="userStore.createNewUser(email, password)" class="sign-up-btn">Sign Up</button>
         </label>
       </div>
-        
-        <button @click="navigateToLogin" class="login-link">Sign In</button>
-        
-        <button @click="userStore.createNewUser(email, password)" class="sign-up-btn">Sign Up</button>
-        
 
-    </form> 
-    
+      <div class="ToLgin">
+        <p>or Already have an account ? </p>
+        <router-link :to="{ path: `/login` }" class="login-link">Sign In</router-link>
+      </div>
+  </form>
+
   </div>
   <Footer />
 </template>
 
 <style scoped>
-
 .home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Arial', sans-serif;
-  height: 75vh;
+  height: 72vh;
   background-color: #999;
+  box-shadow: 0px 0px 09px 0px black;
 }
 
 .home-title {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 16px;
-  color: #262626;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
 }
 
 .home-description {
-  font-size: 14px;
-  margin-bottom: 24px;
-  color: #757575;
+  font-size: 25px;
+  color: unset;
 }
 
 .home-form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: aqua;
+  background-color: #f6b3b3;
   padding: 24px;
-  border: 1px solid #dbdbdb;
   border-radius: 4px;
+  box-shadow: 0px 0px 09px 0px black;
 }
 
 .home-input {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 09px 0px black;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 12px;
 }
 
 .password-input-container {
@@ -106,37 +99,45 @@ const showPassword = ref(false);
 
 .password-label {
   font-size: 12px;
-  color: #8e8e8e;
+  color: unset;
   cursor: pointer;
   user-select: none;
-  margin-top: 8px;
+  margin-right: -65px;
 }
 
 .login-link {
-  padding: 10px 25px;
-font-size: 14px;
-background-color: #3897f0;
-color: #ffffff;
-border-radius: 4px;
-cursor: pointer;
-text-decoration: none;
-margin: 10px;
+  padding: 10px 21px;
+  font-size: 14px;
+  background-color: #3897f0;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 5px;
 }
+
 .sign-up-btn {
   padding: 10px 20px;
   font-size: 14px;
   background-color: #3897f0;
   color: #ffffff;
-
   border-radius: 4px;
   cursor: pointer;
+  margin-left: 20px;
+  border: none;
+}
+
+.ToLgin {
+  display: flex;
+  align-items: center;
+}
+.login-link:hover {
+  background-color: #1877f2;
 }
 
 .sign-up-btn:hover {
   background-color: #1877f2;
 }
-
-
 
 @media (max-width: 600px) {
   .home-input {
