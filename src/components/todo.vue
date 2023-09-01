@@ -54,7 +54,7 @@ const changeTask = async (taskItem) => {
 
 const signOut = async () => {
   await userStore.signOutUser(); // Sign out the user from the userStore
-  router.push('/'); // Redirect the user to the home page
+  router.push({ name: "home" }); // Redirect the user to the home page
 }
 
 onMounted(fetchTasks);

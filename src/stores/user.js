@@ -17,12 +17,11 @@ export const useUserStore = defineStore("userStore", () => {
      }
   
     else {
-      ("Data: ", console.log(data))
+      console.log("Data: ", data);
       user.value = data;
       console.log("info user: ", user.value);
       router.push({ name: "login" });
     }
-  
   };
   
 
@@ -31,8 +30,8 @@ export const useUserStore = defineStore("userStore", () => {
       email: email,
       password: password,
     })
-    if (error) 
-    { window.alert(error); }
+    if (error) { window.alert(error);
+     }
     user.value = data;
     console.log("user signed in :", user.value);
     console.log(error);
@@ -41,9 +40,12 @@ export const useUserStore = defineStore("userStore", () => {
 
   const signOutUser = async () => {
     const { error } = await supabase.auth.signOut();
-    if (error) 
-    window.alert("Error: ", error);
-    user.value={};
+    if (error) {
+      window.alert("Error: " + error.message);
+    } else {
+      user.value = {};
+      router.push({ name: "home" });
+    }
   };
 
 

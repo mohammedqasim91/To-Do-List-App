@@ -2,6 +2,7 @@
 import Footer from "@/components/Footer.vue"
 import NavBar from "@/components/NavBar.vue"
 import { useUserStore } from "@/stores/user";
+import { useRouter } from "vue-router";
 import { ref } from 'vue';
 import router from "../router";
 
@@ -12,6 +13,7 @@ const email = ref("");
 const password = ref("");
 
 const showPassword = ref(false);
+
 
 </script>
 
@@ -24,10 +26,10 @@ const showPassword = ref(false);
 
     <form class="home-form-container" @submit.prevent="userStore.createNewUser(email, password)">
       <p class="home-description">Welcome ToDo App, To Create an account</p>
-      <input class="home-input" placeholder=" Email" v-model="email">
+      <input class="home-input" placeholder=" Write an Email" v-model="email">
 
       <div class="password-input-container">
-        <input class="home-input" placeholder="Password" v-model="password" :type="showPassword ? 'text' : 'password'">
+        <input class="home-input" placeholder="Write an Password" v-model="password" :type="showPassword ? 'text' : 'password'">
 
         <label class="password-label">
             <input type="checkbox" v-model="showPassword">Show Password
@@ -36,7 +38,7 @@ const showPassword = ref(false);
       </div>
 
       <div class="ToLgin">
-        <p>or Already have an account ? </p>
+        <p>or Already have an account ?</p>
         <router-link :to="{ path: `/login` }" class="login-link">Sign In</router-link>
       </div>
   </form>

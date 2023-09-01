@@ -5,6 +5,21 @@ import { useRouter } from "vue-router";
 
 const userStore = useUserStore();
 const router = useRouter();
+const currentTime = ref("");
+
+// Function to get the current time
+const getCurrentTime = () => {
+  const currentHour = new Date().getHours();
+  if (currentHour >= 5 && currentHour < 12) {
+    currentTime.value = "Good Morning";
+  } else if (currentHour >= 12 && currentHour < 18) {
+    currentTime.value = "Good Afternoon";
+  } else {
+    currentTime.value = "Good Evening";
+  }
+};
+
+onMounted(getCurrentTime);
 
 </script>
 
@@ -13,7 +28,7 @@ const router = useRouter();
     <div class="navbar-left">
       <img class="brand-logo" src="@/assets/s-l1600.png" alt="Mohammed Logo">
     </div>
-    <div class="hello" v-if="userStore.user">{{ "Hello " + userStore.user.user.email }}</div>
+    <div class="hi" v-if="userStore.user">{{ currentTime }}, {{ userStore.user.user.email }}</div>
 
     <div class="navbar-right" :class="{ 'show': showNavbar }">
       <ul class="navbar-menu">
@@ -50,7 +65,7 @@ nav {
   border: none;
 }
 
-.hello {
+.hi {
   font-size: 18px;
   font-weight: bolder;
   color: black;
