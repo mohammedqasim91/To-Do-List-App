@@ -118,7 +118,7 @@ const showPassword = ref(false);
 
 .sign-up-btn {
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: 13px;
   background-color: #3897f0;
   color: #ffffff;
   border-radius: 4px;

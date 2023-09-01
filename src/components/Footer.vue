@@ -45,7 +45,7 @@
 .social-media-icons {
   display: flex;
   align-items: center;
-
+  border: none;
 }
 
 .social-media-icons a {
@@ -56,10 +56,6 @@
 .social-media-icons img {
   width: 30px;
   height: 30px;
-}
-
-.social-media-icons a:hover img {
-  filter: brightness(1.2);
 }
 
 .footer-content p {

@@ -21,13 +21,13 @@ const router = useRouter();
           <router-link class="navbar-menu-link" to="/">Home</router-link>
         </li>
         <li class="navbar-menu-item">
-          <a class="navbar-menu-link" href="#">About</a>
+          <router-link :to="{ path: `/login` }" class="navbar-menu-link">Sign In</router-link>
         </li>
         <li class="navbar-menu-item">
           <a class="navbar-menu-link" href="#">Services</a>
         </li>
         <li class="navbar-menu-item">
-          <a class="navbar-menu-link" href="#">Careers</a>
+          <a class="navbar-menu-link" href="#">About</a>
         </li>
       </ul>
     </div>
@@ -47,6 +47,7 @@ nav {
 
 .brand-logo {
   height: 90px;
+  border: none;
 }
 
 .hello {

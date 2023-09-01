@@ -163,6 +163,7 @@ onMounted(fetchTasks);
   cursor: pointer;
   width: 96px;
   margin-bottom: 10px;
+  border: none;
 }
 
 .sign-out-btn {
@@ -174,6 +175,7 @@ onMounted(fetchTasks);
   border-radius: 4px;
   cursor: pointer;
   width: 96px;
+  border: none;
 }
 .right-todo {
   display: flex;

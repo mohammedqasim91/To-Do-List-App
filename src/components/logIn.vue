@@ -120,6 +120,7 @@ const showPassword = ref(false);
   cursor: pointer;
   text-decoration: none;
   margin-top: 10px;
+  border: none;
 }
 
 .sign-in-btn:hover {
