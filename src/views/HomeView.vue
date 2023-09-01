@@ -8,12 +8,10 @@ import router from "../router";
 
 
 const userStore = useUserStore();
-
 const email = ref("");
 const password = ref("");
 
 const showPassword = ref(false);
-
 
 </script>
 
@@ -140,7 +138,7 @@ const showPassword = ref(false);
   background-color: #2404da;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 200px) {
   .home-input {
     width: 100%;
   }

@@ -59,6 +59,7 @@ const signOut = async () => {
 
 onMounted(fetchTasks);
 
+
 </script>
 
 <template>
