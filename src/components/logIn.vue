@@ -124,7 +124,7 @@ const showPassword = ref(false);
 }
 
 .sign-in-btn:hover {
-  background-color:#2404da;
+  background-color: #2404da;
 }
 
 
@@ -137,5 +137,4 @@ const showPassword = ref(false);
     padding: 16px;
   }
 }
-
 </style>
